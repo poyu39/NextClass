@@ -1,14 +1,68 @@
 # NextClass
-基於 IOS 捷徑和 逢甲課務檢索 API 的快速查看下一節課腳本。
+基於 IOS 捷徑和逢甲大學課程檢索系統 API 的快速查看下一節課腳本。
 
-## [iCloud 下載連結](https://www.icloud.com/shortcuts/4371011cd00548ec9d491df7060ec778)
+![image](https://github.com/poyu39/NextClass/assets/42506064/88b461ed-fd6d-49a2-beeb-648ded65c91a)
 
-## 設定
-1. 請到捷徑
-2. 點擊「下一節課」左上角的三個點進入編輯模式
-3. 點選中間最下面的 i 符號進入資訊頁面
-4. 點選設定
-5. 點選自訂捷徑
-6. 輸入 NID 和密碼
 
-![image](https://github.com/poyu39/NextClass/assets/42506064/276c6306-b6f1-4588-8031-1ce34b887f12)
+## 逢甲大學課程檢索系統 API
+```
+功能：登入
+
+POST:  https://coursesearch02.fcu.edu.tw/Service/Auth.asmx/login
+Payload:
+{
+  "id": <NID>,
+  "password": <Password>,
+  "baseOptions": {
+    "lang": <語言(ex. cht)>,
+    "year": <學年度(ex. 112)>,
+    "sms": <學期(ex. 2)>
+  }
+}
+```
+```
+功能：搜尋課程
+POST: https://coursesearch03.fcu.edu.tw/Service/Search.asmx/GetType2Result
+Payload:
+{
+  "baseOptions": {
+    "lang": "cht",
+    "year": 112,
+    "sms": 2
+  },
+  "typeOptions": {
+    "code": {
+      "enabled": true,
+      "value": <選課代碼>
+    },
+    "weekPeriod": {
+      "enabled": false,
+      "week": "*",
+      "period": "*"
+    },
+    "course": {
+      "enabled": false,
+      "value": ""
+    },
+    "teacher": {
+      "enabled": false,
+      "value": ""
+    },
+    "useEnglish": {
+      "enabled": false
+    },
+    "useLanguage": {
+      "enabled": false,
+      "value": "01"
+    },
+    "specificSubject": {
+      "enabled": false,
+      "value": "1"
+    },
+    "courseDescription": {
+      "enabled": false,
+      "value": ""
+    }
+  }
+}
+```
